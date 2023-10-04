@@ -1,9 +1,15 @@
 package src;
+
+import java.util.Iterator;
+import java.util.Stack;
 public class BinaryTree {
 
     private BTNode root;
     public BinaryTree(){
         root = null;
+    }
+    public BTNode getRoot(){
+        return root;
     }
 
     public int Height (BTNode node) {
@@ -58,11 +64,11 @@ public class BinaryTree {
         boolean flag = false;
         return flag;
     }
-    public void InOrder(BTNode node){
+    public void InOrdern(BTNode node){
         if (node != null) {
-            InOrder(node.getLeft()); // recursively call the left node
+            InOrdern(node.getLeft()); // recursively call the left node
             System.out.println(node.getKey()); // print the node key
-            InOrder(node.getRight()); // recursively call the right node
+            InOrdern(node.getRight()); // recursively call the right node
         }
     }
     public BTNode Remove(BTNode node, int key){
@@ -99,14 +105,30 @@ public class BinaryTree {
         if (node == null) {
             return false;
         }
-        if (node.getKey() > key) {
-            return Contains(node, key);
-        } else if (node.getKey() < key) {
-            return Contains(node, key);
+        if (node.getKey() < key) {
+            return Contains(node.getLeft(), key);
+        } else if (node.getKey() > key) {
+            return Contains(node.getRight(), key);
         } else {  // => node.getKey() == key (if it's found)
             return true;
         }
     }
+    public void RemovekLargest(BTNode node, int k){
+        Iterator it = new InOrder(this);
+        Stack<BTNode> stack = ((InOrder) it).getStack(); // get the stack from the InOrder class
+        BTNode node_to_remove = null;
+        for (int i = stack.size(); i >= k; i--) { // iterate k times
+            if (stack.isEmpty()) { // if the stack is empty, break
+                break;
+                // this can happen if the tree has less than k nodes
+            }
+            node_to_remove = stack.pop(); // pop the node from the stack
+        }
+        System.out.println("Node to remove: " + node_to_remove.getKey());
+        Remove(node, node_to_remove.getKey()); // remove the node
+    }
+
+    
     public static void main(String[] args)  {
         
     }

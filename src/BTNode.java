@@ -5,6 +5,11 @@ public class BTNode {
     private BTNode left;
     private BTNode right;
 
+    public BTNode() { // default constructor
+        key = 0;
+        left = null;
+        right = null;
+    }
 
     public BTNode(int key_){
         key = key_;
