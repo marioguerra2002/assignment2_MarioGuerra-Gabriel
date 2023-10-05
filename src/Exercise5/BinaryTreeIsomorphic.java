@@ -1,10 +1,13 @@
-package src.Exercise4;
+package src.Exercise5;
+
 import java.util.Iterator;
 import java.util.Stack;
-public class BinaryTree {
 
-    private BTNode root;
-    public BinaryTree(){
+import src.Exercise5.InOrder;
+
+public class BinaryTreeIsomorphic {
+  private BTNode root;
+    public BinaryTreeIsomorphic(){
         root = null;
     }
     public BTNode getRoot(){
@@ -126,7 +129,27 @@ public class BinaryTree {
         System.out.println("Node to remove: " + node_to_remove.getKey());
         Remove(node, node_to_remove.getKey()); // remove the node
     }
-
+    public boolean isImorphic(BinaryTreeIsomorphic treeBin2) {
+        if (this.getRoot() == null && treeBin2.getRoot() == null) { // if both trees are empty, return true
+            return true;
+        }
+        if (this.getRoot() == null || treeBin2.getRoot() == null) { // if one of the trees is empty, return false
+            return false;
+        }
+        if (this.Size(this.getRoot()) != treeBin2.Size(treeBin2.getRoot())) { // if the sizes are different, return false
+            return false;
+        }
+        if (this.Height(this.getRoot()) != treeBin2.Height(treeBin2.getRoot())) { // if the heights are different, return false
+            return false;
+        }
+        return isImorphic(this.getRoot(), treeBin2.getRoot()); // call the isImorphic overload method
+    }
+    
+    public boolean isImorphic(BTNode node1, BTNode node2) {
+        boolean left_part = isImorphic(this.getRoot().getLeft(), node2.getLeft()); // recursively call the left nodes
+        boolean right_part = isImorphic(this.getRoot().getRight(), node2.getRight()); // recursively call the right nodes
+        return left_part && right_part; // return true if both are true (must have same left and right nodes and structure)
+    }
     
     public static void main(String[] args)  {
         

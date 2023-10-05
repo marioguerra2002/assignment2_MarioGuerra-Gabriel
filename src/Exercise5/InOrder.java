@@ -1,4 +1,4 @@
-package src.Exercise4;
+package src.Exercise5;
 
 
 import java.util.Iterator;
@@ -9,7 +9,7 @@ public class InOrder implements Iterator<BTNode> {
 
     private Stack<BTNode> stack;
 
-    public InOrder(BinaryTree treeBin) {
+    public InOrder(BinaryTreeIsomorphic treeBin) {
         stack = new Stack<>();
         pushLeftNodes(treeBin.getRoot());
     }
