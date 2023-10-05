@@ -115,6 +115,7 @@ public class BinaryTreeIsomorphic {
             return true;
         }
     }
+    
     public void RemovekLargest(BTNode node, int k){
         Iterator it = new InOrder(this);
         Stack<BTNode> stack = ((InOrder) it).getStack(); // get the stack from the InOrder class
@@ -148,7 +149,10 @@ public class BinaryTreeIsomorphic {
     public boolean isImorphic(BTNode node1, BTNode node2) {
         boolean left_part = isImorphic(this.getRoot().getLeft(), node2.getLeft()); // recursively call the left nodes
         boolean right_part = isImorphic(this.getRoot().getRight(), node2.getRight()); // recursively call the right nodes
-        return left_part && right_part; // return true if both are true (must have same left and right nodes and structure)
+        // in case the left and right nodes are flipped
+        boolean flixed_right = isImorphic(this.getRoot().getLeft(), node2.getRight());
+        boolean flixed_left = isImorphic(this.getRoot().getRight(), node2.getLeft());
+        return (left_part && right_part) || (flixed_left && flixed_right); // return true if both are true (must have same left and right nodes and structure)
     }
     
     public static void main(String[] args)  {
