@@ -17,5 +17,6 @@ public class HuffmanNode {
     public void setLeftChild(HuffmanNode leftNode) { left = leftNode;}
     public void setRightChild(HuffmanNode righNode) {right = righNode;}
     public HuffmanNode getLeft() { return left; }
-    public HuffmanNode getRight(){return right; }
+    public HuffmanNode getRight(){ return right; }
+    public int getFrecuency() { return frecuency; }
 }
